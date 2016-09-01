@@ -13,6 +13,13 @@ defmodule Peepchat.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  scope "/", Peepchat do
+    pipe_through(:api)
+    get "/ping", ApplicationInfoController, :ping
+    get "/health", ApplicationInfoController, :health
+    get "/info", ApplicationInfoController, :info
+  end
+
   scope "/api", Peepchat do
     pipe_through :api
     #Registration
